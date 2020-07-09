@@ -25,7 +25,7 @@ SECRET_KEY = 'tgc_p32f40!$2)1(g@6md)9^wc7lfbif=_@9*a0d^qy0zwii9z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environment.get('DEBUG',1))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-13-235-114-175.ap-south-1.compute.amazonaws.com', '127.0.0.1']
 
 
 # Application definition
