@@ -2,8 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
 
 from profiles_api import serializers
+from profiles_api import models
+from profiles_api import permissions
 
 class HelloApiView(APIView):
 
@@ -48,7 +51,7 @@ class HelloViewSet(viewsets.ViewSet):
         a_viewset=[
         'usefasfjasdlf',
         'adsfohefhbbhfhfhdsfsd',
-        'jirhjjggurtj sfjosies fsd fosaijfo asdf as dfas df Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        'jirhjjggurtj sfjosies fsd fosaijfo asdf as dfas df sit amet, laborum.'
         ]
         return Response({'message':'hello', 'a_viewset': a_viewset})
 
@@ -77,3 +80,9 @@ class HelloViewSet(viewsets.ViewSet):
 
     def destroy(self, request, pk=None):
         return Response({'HTTP method': 'delete'})
+
+class UserPRofileViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnProfile,)
